@@ -42,7 +42,7 @@ struct UI_TestingView: View {
             
             ZStack {
                 if vm.currentItemisSaved {
-                    Text("Hoo")
+                    SavedHomeView()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .transition(.move(edge: .leading))
                 }
@@ -84,5 +84,46 @@ extension UI_TestingView {
             })
         }
         .padding()
+    }
+}
+
+struct SavedHomeView: View {
+    @State private var showAlert: Bool = false
+    
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 20) {
+                
+                Button(action: {
+                    showAlert.toggle()
+                }, label: {
+                    Text("Show welcome alert")
+                        .font(.system(size: 20, weight: .semibold, design: .rounded))
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(.white)
+                        .background(Color.orange)
+                        .cornerRadius(15)
+                })
+                .alert(isPresented: $showAlert, content: {
+                    return Alert(title: Text("Welcome to the store."))
+                })
+                
+                NavigationLink {
+                    Text("Destination")
+                } label: {
+                    Text("Navigate")
+                        .font(.system(size: 20, weight: .semibold, design: .rounded))
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(.white)
+                        .background(Color.black)
+                        .cornerRadius(15)
+                }
+            }
+            .navigationTitle("Welcome to the store")
+            .padding()
+        }
+        .accentColor(.black)
     }
 }
