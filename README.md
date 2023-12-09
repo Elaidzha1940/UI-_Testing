@@ -1,0 +1,2 @@
+UI testing or popularly known as GUI testing is the definitional name for testing the portions of any tech product that any user comes in direct contact with.
+Since UI stands for “user interface,” we could say UI testing consists of testing the user interface of an application and leave it at that. It's more complex than that, however. For starters, “user interface” isn't a single thing. Rather, there are different types of UI.
