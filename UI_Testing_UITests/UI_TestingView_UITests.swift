@@ -75,6 +75,40 @@ final class UI_TestingView_UITests: XCTestCase {
     }
     
     func test_SavedHomeView_showAlertButton_shouldDisplayAndDismissAlert() {
+        // Given
+        let textfield = app.textFields["SaveTextField"]
         
+        // When
+        textfield.tap()
+        
+        let keyE = app.keys["E"]
+        keyE.tap()
+        let keye = app.keys["e"]
+        keye.tap()
+        keye.tap()
+        
+        let returnButton = app.buttons["Return"]
+        returnButton.tap()
+        
+        let saveButton = app.buttons["SaveButton"]
+        saveButton.tap()
+        
+        let navBar =  app.navigationBars["Welcome to the store"]
+        XCTAssertTrue(navBar.exists)
+        
+        let showAlertButton = app.buttons["ShowAlertButton"]
+        showAlertButton.tap()
+        
+        let alert = app.alerts.firstMatch
+        XCTAssertTrue(alert.exists)
+
+        let alertOKButton = alert.buttons["OK"]
+        XCTAssertTrue(alertOKButton.exists)
+        sleep(1)
+        alertOKButton.tap()
+        sleep(1)
+    
+        // Then
+        XCTAssertFalse(alert.exists)
     }
 }

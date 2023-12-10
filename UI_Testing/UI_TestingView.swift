@@ -108,8 +108,10 @@ struct SavedHomeView: View {
                         .background(Color.orange)
                         .cornerRadius(15)
                 })
+                .accessibilityIdentifier("ShowAlertButton")
                 .alert(isPresented: $showAlert, content: {
                     return Alert(title: Text("Welcome to the store."))
+
                 })
                 
                 NavigationLink {
@@ -123,6 +125,7 @@ struct SavedHomeView: View {
                         .background(Color.black)
                         .cornerRadius(15)
                 }
+                .accessibilityIdentifier("NavigationLinkToDestination")
             }
             .navigationTitle("Welcome to the store")
             .padding()
