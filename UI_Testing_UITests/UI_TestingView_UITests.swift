@@ -16,12 +16,12 @@ import XCTest
 final class UI_TestingView_UITests: XCTestCase {
     
     let app = XCUIApplication()
-
+    
     override func setUpWithError() throws {
-//        continueAfterFailure = false
-//        app.launch()
+        continueAfterFailure = false
+        app.launch()
     }
-
+    
     override func tearDownWithError() throws {
         
     }
@@ -31,20 +31,28 @@ final class UI_TestingView_UITests: XCTestCase {
     }
     
     func test_UI_TestingView_saveButton_shoudSaveIt() {
+        // Given
+        let textfield = app.textFields["Add an item..."]
         
-        app.textFields["Add an item..."].tap()
-        //app.buttons["Next keyboard"].tap()
+        // When
+        textfield.tap()
         
-        app/*@START_MENU_TOKEN@*/.keys["E"]/*[[".keyboards.keys[\"E\"]",".keys[\"E\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        let keyE = app.keys["E"]
+        keyE.tap()
+        let keye = app.keys["e"]
+        keye.tap()
+        keye.tap()
         
-        let eKey = app/*@START_MENU_TOKEN@*/.keys["e"]/*[[".keyboards.keys[\"e\"]",".keys[\"e\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-        eKey.tap()
-        eKey.tap()
-        eKey.tap()
-        app/*@START_MENU_TOKEN@*/.buttons["Return"]/*[[".keyboards",".buttons[\"return\"]",".buttons[\"Return\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.buttons["Save"].tap()
-        app.navigationBars["Welcome to the store"].staticTexts["Welcome to the store"].tap()
-                        
+        let returnButton = app.buttons["Return"]
+        returnButton.tap()
+        
+        let saveButton = app.buttons["Save"]
+        saveButton.tap()
+        
+        let navBar =  app.navigationBars["Welcome to the store"]
+        
+        // Then
+        XCTAssertTrue(navBar.exists)
     }
-
+    
 }
