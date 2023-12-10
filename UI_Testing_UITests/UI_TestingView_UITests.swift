@@ -14,9 +14,12 @@ import XCTest
 // Testing Structure: Given, When, Then
 
 final class UI_TestingView_UITests: XCTestCase {
+    
+    let app = XCUIApplication()
 
     override func setUpWithError() throws {
-        
+//        continueAfterFailure = false
+//        app.launch()
     }
 
     override func tearDownWithError() throws {
@@ -28,7 +31,20 @@ final class UI_TestingView_UITests: XCTestCase {
     }
     
     func test_UI_TestingView_saveButton_shoudSaveIt() {
-                
+        
+        app.textFields["Add an item..."].tap()
+        //app.buttons["Next keyboard"].tap()
+        
+        app/*@START_MENU_TOKEN@*/.keys["E"]/*[[".keyboards.keys[\"E\"]",".keys[\"E\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        let eKey = app/*@START_MENU_TOKEN@*/.keys["e"]/*[[".keyboards.keys[\"e\"]",".keys[\"e\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        eKey.tap()
+        eKey.tap()
+        eKey.tap()
+        app/*@START_MENU_TOKEN@*/.buttons["Return"]/*[[".keyboards",".buttons[\"return\"]",".buttons[\"Return\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.buttons["Save"].tap()
+        app.navigationBars["Welcome to the store"].staticTexts["Welcome to the store"].tap()
+                        
     }
 
 }
