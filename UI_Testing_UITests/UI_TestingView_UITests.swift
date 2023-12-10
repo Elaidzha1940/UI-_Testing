@@ -40,7 +40,7 @@ final class UI_TestingView_UITests: XCTestCase {
     func test_UI_TestingView_saveButton_shoudSaveIt() {
         // Given
         saveItAndSaveThat(shouldTypeOneKeyboard: true)
-
+        
         // When
         let navBar =  app.navigationBars["Welcome to the store"]
         
@@ -50,31 +50,17 @@ final class UI_TestingView_UITests: XCTestCase {
     
     func test_SavedHomeView_showAlertButton_shouldDisplayAlert() {
         // Given
-       saveItAndSaveThat(shouldTypeOneKeyboard: true)
+        saveItAndSaveThat(shouldTypeOneKeyboard: true)
         
         // When
-       tapAlertButton(shouldDismissAlert: false)
+        tapAlertButton(shouldDismissAlert: false)
         
         // Then
         let alert = app.alerts.firstMatch
         XCTAssertTrue(alert.exists)
     }
     
-    func tapAlertButton(shouldDismissAlert: Bool) {
-        let showAlertButton = app.buttons["ShowAlertButton"]
-        showAlertButton.tap()
-        
-        if shouldDismissAlert {
-            let alert = app.alerts.firstMatch
-            let alertOKButton = alert.buttons["OK"]
-            
-            //sleep(1)
-            let alertOKButtonExists = alertOKButton.waitForExistence(timeout: 5)
-            XCTAssertTrue(alertOKButtonExists)
-            
-            alertOKButton.tap()
-        }
-    }
+    
     
     func test_SavedHomeView_showAlertButton_shouldDisplayAndDismissAlert() {
         // Given
@@ -83,79 +69,32 @@ final class UI_TestingView_UITests: XCTestCase {
         // When
         tapAlertButton(shouldDismissAlert: true)
         
-       
-        
-        //sleep(1)
-        let alertExists = alert.waitForExistence(timeout: 5)
-    
         // Then
+        let alertExists = app.alerts.firstMatch.waitForExistence(timeout: 5)
         XCTAssertFalse(alertExists)
-        XCTAssertFalse(alert.exists)
     }
     
     func test_SavedHomeView_navigationLinkToDestination_shouldNavigateToDestination() {
         // Given
-        let textfield = app.textFields["SaveTextField"]
+        saveItAndSaveThat(shouldTypeOneKeyboard: true)
         
         // When
-        textfield.tap()
-        
-        let keyE = app.keys["E"]
-        keyE.tap()
-        let keye = app.keys["e"]
-        keye.tap()
-        keye.tap()
-        
-        let returnButton = app.buttons["Return"]
-        returnButton.tap()
-        
-        let saveButton = app.buttons["SaveButton"]
-        saveButton.tap()
-        
-        let navBar =  app.navigationBars["Welcome to the store"]
-        XCTAssertTrue(navBar.exists)
-        
-        let navLinkButton =  app.buttons["NavigationLinkToDestination"]
-        navLinkButton.tap()
-        
-        let navigationText = app.staticTexts["Destination"]
+        tapNavigationLink(shouldDismissDestination: false)
         
         // Then
+        let navigationText = app.staticTexts["Destination"]
         XCTAssertTrue(navigationText.exists)
     }
     
     func test_SavedHomeView_navigationLinkToDestination_shouldNavigateToDestinationAndGoBack() {
         // Given
-        let textfield = app.textFields["SaveTextField"]
+        saveItAndSaveThat(shouldTypeOneKeyboard: true )
         
         // When
-        textfield.tap()
-        
-        let keyE = app.keys["E"]
-        keyE.tap()
-        let keye = app.keys["e"]
-        keye.tap()
-        keye.tap()
-        
-        let returnButton = app.buttons["Return"]
-        returnButton.tap()
-        
-        let saveButton = app.buttons["SaveButton"]
-        saveButton.tap()
-        
-        let navBar =  app.navigationBars["Welcome to the store"]
-        XCTAssertTrue(navBar.exists)
-        
-        let navLinkButton =  app.buttons["NavigationLinkToDestination"]
-        navLinkButton.tap()
-        
-        let navigationText = app.staticTexts["Destination"]
-        XCTAssertTrue(navigationText.exists)
-
-        let backButton = app.navigationBars.buttons["Welcome to the store"]
-        backButton.tap()
+        tapNavigationLink(shouldDismissDestination: true)
         
         // Then
+        let navBar =  app.navigationBars["Welcome to the store"]
         XCTAssertTrue(navBar.exists)
     }
 }
@@ -181,5 +120,31 @@ extension UI_TestingView_UITests {
         
         let saveButton = app.buttons["SaveButton"]
         saveButton.tap()
+    }
+    
+    func tapAlertButton(shouldDismissAlert: Bool) {
+        let showAlertButton = app.buttons["ShowAlertButton"]
+        showAlertButton.tap()
+        
+        if shouldDismissAlert {
+            let alert = app.alerts.firstMatch
+            let alertOKButton = alert.buttons["OK"]
+            
+            //sleep(1)
+            let alertOKButtonExists = alertOKButton.waitForExistence(timeout: 5)
+            XCTAssertTrue(alertOKButtonExists)
+            
+            alertOKButton.tap()
+        }
+    }
+    
+    func tapNavigationLink(shouldDismissDestination: Bool) {
+        let navLinkButton =  app.buttons["NavigationLinkToDestination"]
+        navLinkButton.tap()
+        
+        if shouldDismissDestination {
+            let backButton = app.navigationBars.buttons["Welcome to the store"]
+            backButton.tap()
+        }
     }
 }
