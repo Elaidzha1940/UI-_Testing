@@ -19,7 +19,7 @@ import SwiftUI
  */
 
 class UITestingViewModel: ObservableObject {
-    let placeholderText: String = "Add an item..."
+    let placeholderText: String = "Add an item here..."
     @Published var textField: String = ""
     @Published var currentItemisSaved: Bool = false
     
@@ -68,6 +68,7 @@ extension UI_TestingView {
                 .padding()
                 .background(Color.white)
                 .cornerRadius(15)
+                .accessibilityIdentifier("SaveTextField")
             
             Button(action: {
                 withAnimation(.spring()) {
@@ -82,6 +83,8 @@ extension UI_TestingView {
                     .background(Color.black)
                     .cornerRadius(15)
             })
+            .accessibilityIdentifier("SaveButton")
+
         }
         .padding()
     }

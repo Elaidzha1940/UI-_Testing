@@ -32,7 +32,7 @@ final class UI_TestingView_UITests: XCTestCase {
     
     func test_UI_TestingView_saveButton_shoudSaveIt() {
         // Given
-        let textfield = app.textFields["Add an item..."]
+        let textfield = app.textFields["SaveTextField"]
         
         // When
         textfield.tap()
@@ -46,7 +46,7 @@ final class UI_TestingView_UITests: XCTestCase {
         let returnButton = app.buttons["Return"]
         returnButton.tap()
         
-        let saveButton = app.buttons["Save"]
+        let saveButton = app.buttons["SaveButton"]
         saveButton.tap()
         
         let navBar =  app.navigationBars["Welcome to the store"]
