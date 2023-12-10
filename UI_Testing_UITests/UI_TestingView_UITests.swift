@@ -27,7 +27,22 @@ final class UI_TestingView_UITests: XCTestCase {
     }
     
     func test_UI_TestingView_saveButton_shoudNotSaveIt() {
+        // Given
+        let textfield = app.textFields["SaveTextField"]
         
+        // When
+        textfield.tap()
+        
+        let returnButton = app.buttons["Return"]
+        returnButton.tap()
+        
+        let saveButton = app.buttons["SaveButton"]
+        saveButton.tap()
+        
+        let navBar =  app.navigationBars["Welcome to the store"]
+        
+        // Then
+        XCTAssertFalse(navBar.exists)
     }
     
     func test_UI_TestingView_saveButton_shoudSaveIt() {
@@ -55,4 +70,11 @@ final class UI_TestingView_UITests: XCTestCase {
         XCTAssertTrue(navBar.exists)
     }
     
+    func test_SavedHomeView_showAlertButton_shouldDisplayAlert() {
+        
+    }
+    
+    func test_SavedHomeView_showAlertButton_shouldDisplayAndDismissAlert() {
+        
+    }
 }
