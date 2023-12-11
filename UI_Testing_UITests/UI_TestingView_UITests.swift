@@ -19,6 +19,7 @@ final class UI_TestingView_UITests: XCTestCase {
     
     override func setUpWithError() throws {
         continueAfterFailure = false
+        app.launchArguments = ["-UITest_startSaving"]
         app.launch()
     }
     
@@ -97,6 +98,18 @@ final class UI_TestingView_UITests: XCTestCase {
         let navBar =  app.navigationBars["Welcome to the store"]
         XCTAssertTrue(navBar.exists)
     }
+    
+//    func test_SavedHomeView_navigationLinkToDestination_shouldNavigateToDestinationAndGoBack2() {
+//        // Given
+//        // saveItAndSaveThat(shouldTypeOneKeyboard: true )
+//        
+//        // When
+//        tapNavigationLink(shouldDismissDestination: true)
+//        
+//        // Then
+//        let navBar =  app.navigationBars["Welcome to the store"]
+//        XCTAssertTrue(navBar.exists)
+//    }
 }
 
 // MARK: Functions
