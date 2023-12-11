@@ -70,6 +70,7 @@ struct UI_TestingView: View {
 
 extension UI_TestingView {
     private var saveLayer: some View {
+        
         VStack {
             TextField(vm.placeholderText, text: $vm.textField)
                 .font(.system(size: 20, weight: .semibold, design: .rounded))
@@ -92,7 +93,7 @@ extension UI_TestingView {
                     .cornerRadius(15)
             })
             .accessibilityIdentifier("SaveButton")
-
+            
         }
         .padding()
     }
@@ -102,6 +103,7 @@ struct SavedHomeView: View {
     @State private var showAlert: Bool = false
     
     var body: some View {
+        
         NavigationStack {
             VStack(spacing: 20) {
                 
@@ -119,7 +121,7 @@ struct SavedHomeView: View {
                 .accessibilityIdentifier("ShowAlertButton")
                 .alert(isPresented: $showAlert, content: {
                     return Alert(title: Text("Welcome to the store."))
-
+                    
                 })
                 
                 NavigationLink {
