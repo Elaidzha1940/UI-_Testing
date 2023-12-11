@@ -19,7 +19,8 @@ final class UI_TestingView_UITests: XCTestCase {
     
     override func setUpWithError() throws {
         continueAfterFailure = false
-        app.launchArguments = ["-UITest_startSaving"]
+        //app.launchArguments = ["-UITest_startSaving"]
+        //app.launchEnvironment = ["-UITest_startSaving2" : "true"]
         app.launch()
     }
     
