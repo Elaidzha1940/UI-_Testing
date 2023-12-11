@@ -23,6 +23,10 @@ class UITestingViewModel: ObservableObject {
     @Published var textField: String = ""
     @Published var currentItemisSaved: Bool = false
     
+    init(currentItemisSaved: Bool) {
+        self.currentItemisSaved = currentItemisSaved
+    }
+    
     func saveButtonPressed() {
         guard !textField.isEmpty else { return }
         currentItemisSaved = true
@@ -30,7 +34,11 @@ class UITestingViewModel: ObservableObject {
 }
 
 struct UI_TestingView: View {
-    @StateObject private var vm = UITestingViewModel()
+    @StateObject private var vm: UITestingViewModel
+    
+    init(currentItemisSaved: Bool) {
+        _vm = StateObject(wrappedValue: UITestingViewModel(currentItemisSaved: currentItemisSaved))
+    }
     
     var body: some View {
         
@@ -57,7 +65,7 @@ struct UI_TestingView: View {
 }
 
 #Preview {
-    UI_TestingView()
+    UI_TestingView(currentItemisSaved: true)
 }
 
 extension UI_TestingView {

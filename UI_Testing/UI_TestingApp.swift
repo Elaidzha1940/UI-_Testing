@@ -12,15 +12,16 @@ import SwiftUI
 @main
 struct UI_TestingApp: App {
     
+    let currentItemisSaved: Bool
+    
     init() {
-        
         let itemIsSaved: Bool = CommandLine.arguments.contains("-UITest_startSaving") ? true : false
-       print("ITEM IS SAVED \(itemIsSaved)")
+        self.currentItemisSaved = itemIsSaved
     }
     
     var body: some Scene {
         WindowGroup {
-            UI_TestingView()
+            UI_TestingView(currentItemisSaved: currentItemisSaved)
         }
     }
 }
